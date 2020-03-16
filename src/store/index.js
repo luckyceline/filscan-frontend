@@ -8,13 +8,9 @@ export default new Vuex.Store({
     defaultHeight: 0,
     rate: 1,
     loadCount: 0,
-    theme: "dark",
-    isMobile: true,
+    theme: "dark"
   },
   mutations: {
-    setIsMobile(state, isMobile) {
-      state.isMobile = isMobile;
-    },
     setHeight(state, height) {
       state.defaultHeight = height;
     },

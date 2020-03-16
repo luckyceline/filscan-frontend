@@ -1,8 +1,8 @@
 <template>
   <div
-    class="address-con"
+    class="address-con bottom-10"
     v-loading="loading"
-    element-loading-background="transparent"
+    element-loading-background="var(--board-bg-color)"
   >
     <div class="total-number border-bottom">
       <span
@@ -14,8 +14,8 @@
         "
       ></span>
     </div>
-
-    <div class="table-con" v-if="!isMobile">
+    <div class="address-list" v-if="!isMobile">
+      <div class="table-con">
         <base-table
           :dataSource="addressData"
           :columns="columns"
@@ -25,27 +25,23 @@
           @page-change="handlePageChange"
           :labels="$t('address.list.label')"
         ></base-table>
+      </div>
     </div>
-
-    <div class="mobile-table-con" v-if="isMobile">
-      <MbBoard
-        v-for="item in addressData"
-        :key="item.cid"
-        :dataSource="item"
-        :columns="mbColumns"
-      />
-    </div>
-
+    <mb-board
+      v-for="item in addressData"
+      :key="item.cid"
+      :dataSource="item"
+      :columns="mbColumns"
+      v-else
+    />
     <mb-page v-if="isMobile" @page-change="handlePageChange" :total="total" />
   </div>
 </template>
 <script>
 import { getAccountList } from "@/api/account";
 import mixin from "./mixin";
-import MbBoard from "../../components/MbBoard";
 export default {
   name: "AddressList",
-  components: {MbBoard},
   mixins: [mixin],
   data() {
     return {
@@ -130,25 +126,33 @@ export default {
 </script>
 <style lang="scss" scoped>
 .address-con {
-  @include panel;
-  @include fillHeight;
-  min-height: 8rem;
-
   .total-number {
-    line-height: 2;
+    height: 80px;
     align-items: center;
+    padding: 0 56px;
+    display: flex;
+    background: var(--board-bg-color);
     color: var(--main-text-color);
     & ::v-deep > span {
       margin-right: auto;
       i {
         color: var(--link-color);
-        font-size: $--font-size-base;
+        font-size: 22px;
       }
     }
   }
-  .table-con,
-  .mobile-table-con {
-    @include fillHeight;
+  & ::v-deep .el-table {
+    height: calc(100vh - 300px) !important;
+  }
+  @media (max-width: 768px) {
+    .total-number {
+      height: 30px;
+      margin-bottom: 10px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    min-height: calc(100vh - 90px);
   }
 }
 </style>

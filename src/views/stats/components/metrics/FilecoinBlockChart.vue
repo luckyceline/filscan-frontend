@@ -1,5 +1,5 @@
 <template>
-  <div class="filecoin-block-chart" v-resize:debounce="resizeChart">
+  <div class="filecoin-block-chart">
     <div class="title">{{ $t("stats.metrics.filecoin.title") }}</div>
     <div ref="chart" class="chart-con"></div>
   </div>
@@ -16,9 +16,6 @@ export default {
     };
   },
   methods: {
-    resizeChart() {
-      chart.resize();
-    },
     drawChart() {
       const numberConversion = this.numberConversion;
       const rate = this.rate;
@@ -137,8 +134,9 @@ export default {
 </script>
 <style lang="scss" scoped>
 .filecoin-block-chart {
-  @include panel;
-
+  background: var(--board-bg-color);
+  border-radius: 8px;
+  box-shadow: 0px 1px 7px 9px rgba(0, 0, 0, 0.03);
   .title {
     height: 60px;
     line-height: 60px;

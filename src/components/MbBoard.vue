@@ -58,10 +58,13 @@ export default {
 @media (max-width: 768px) {
   .mb-board {
     background: var(--board-bg-color);
-    padding-bottom: $vertical-space;
-    border-bottom: .1rem solid var(--main-bg-color);
+    margin-bottom: 10px;
+    padding: 0 4vw 4vw;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.03);
+    border-radius: 10px;
     .title {
-      @include title;
+      color: var(--total-board-top-color);
+      margin: 4vw 0 2.5vw;
     }
     &.el-row {
       flex-wrap: wrap;

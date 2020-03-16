@@ -9,7 +9,7 @@
     <div
       class="detail-info-con"
       v-loading="showLoading"
-      element-loading-background="transparent"
+      element-loading-background="var(--board-bg-color)"
     >
       <div
         class="info-item"
@@ -19,7 +19,12 @@
       >
         <span class="info-title">{{ item.title }}:</span>
         <div
-          v-if="!item.isComponent && item.isLink && item.linkList && item.linkList[0]"
+          v-if="
+            !item.isComponent &&
+              item.isLink &&
+              item.linkList &&
+              item.linkList[0]
+          "
           class="link-list"
         >
           <base-link
@@ -110,11 +115,11 @@ export default {
 .general-overview {
   color: var(--overview-text-color);
   background: var(--overview-bg-color);
-
+  box-shadow: 0px 1px 5px 7px rgba(0, 0, 0, 0.03);
+  border-radius: 4px;
   .detail-info-con {
-    @include panel;
-
     .info-item {
+      min-height: 60px;
       display: flex;
       &.stripe:nth-child(2n) {
         background: var(--overview-bg-dark-color);
@@ -122,15 +127,16 @@ export default {
       &.params {
         height: auto;
         span:last-child {
-          font-size: $--font-size-small;
+          font-size: 12px;
           color: var(--white);
         }
       }
       span {
-        line-height: 2;
+        line-height: 60px;
       }
       span:first-child {
-        min-width: 15rem;
+        padding-left: 100px;
+        min-width: 200px;
       }
       span:last-child {
         flex: 1;
@@ -161,9 +167,6 @@ export default {
     line-height: 80px;
     padding-left: 50px;
     background: var(--main-bg-color);
-  }
-  .info-title {
-    padding-right: .25 * $vertical-space;
   }
   @media (max-width: 768px) {
     &.general-overview {

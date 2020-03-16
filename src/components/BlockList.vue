@@ -213,8 +213,9 @@ export default {
 <style lang="scss" scoped>
 .block-list {
   .total-number {
+    height: 80px;
     align-items: center;
-    padding: $vertical-space;
+    padding: 0 100px;
     display: flex;
     background: var(--board-bg-color);
     color: var(--main-text-color);
@@ -222,6 +223,7 @@ export default {
       margin-right: auto;
       i {
         color: var(--link-color);
+        font-size: 22px;
       }
     }
     .el-dropdown-link {

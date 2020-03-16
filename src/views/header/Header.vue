@@ -1,14 +1,14 @@
 <template>
-  <div class="header">
-    <div class="header--inner">
-      <div class="logo-con" @click="goTo('home')">
+  <div class="header-con">
+    <el-row align="middle" type="flex">
+      <el-col :span="6" class="logo-con" @click.native="goTo('home')">
         <img src="@/assets/logo.png" class="logo" />
         <span>{{ $t("header.title") }}</span>
-      </div>
-      <div class="search-wrap">
+      </el-col>
+      <el-col :span="10" class="search-wrap">
         <Search />
-      </div>
-      <div class="link-con">
+      </el-col>
+      <el-col :span="6" class="link-con">
         <el-menu mode="horizontal" :default-active="$route.path" :router="true">
           <el-menu-item index="/">{{
             $t("header.nav.home.label")
@@ -34,10 +34,14 @@
             >
           </el-submenu>
         </el-menu>
-      </div>
-      <theme-switch />
-      <div class="test-pic-spacer"></div><img :src="testPicSrc" alt="" class="test-pic"/>
-    </div>
+      </el-col>
+      <el-col :span="2">
+        <!-- <span class="testnet">Testnet</span> -->
+        <!-- <span :class="[iconClass,'theme-switch']" @click="handleThemeChange"></span> -->
+        <theme-switch />
+      </el-col>
+    </el-row>
+    <img :src="testPicSrc" alt="" class="test-pic" />
   </div>
 </template>
 <script>
@@ -127,31 +131,25 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.header {
-  padding: 0 $horizontal-space;
-  line-height: $header-height;
+.header-con {
+  padding: 0 20px;
+  height: 70px;
+  position: fixed;
+  width: 100%;
+  max-width: 100vw;
+  box-sizing: border-box;
   z-index: 1000;
-
-  &--inner {
-    display: flex;
-    line-height: 2.5rem;
-    align-items: center;
-  }
-
   background: var(--board-bg-color);
   color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  box-shadow: 0 1px 4px 5px rgba(0, 0, 0, 0.03);
-
+  box-shadow: 0px 1px 4px 5px rgba(0, 0, 0, 0.03);
   .link-con {
     display: flex;
     justify-content: flex-end;
-    align-items: center;
     ul{
       background: var(--board-bg-color);
-
       li::v-deep{
         color: var(--main-text-color)!important;
         &.is-active{
@@ -170,7 +168,6 @@ export default {
         }
 
       }
-
     }
     a {
       font-size: 24px;
@@ -197,47 +194,45 @@ export default {
     height: 100%;
   }
   .theme-switch{
+    font-size: 30px;
+    color: var(--main-text-color)
   }
   .testnet{
     font-size: 24px;
     color: var(--link-color);
     margin: 0 15px
   }
-  .test-pic-spacer {
-    width: 2rem;
-  }
   .test-pic{
     position: absolute;
-    height: .75 * $header-height;
+    height: 70px;
     right: 0;
     top: 0
   }
 }
-.logo-con  {
+.logo-con,
+.search-wrap {
   display: flex;
   align-items: center;
   justify-content: left;
-  cursor: pointer;
-
   .icon {
     margin-left: auto;
     width: 40px;
   }
-  .logo {
-    width: 2.5rem;
-    margin-right: 20px;
-    & + span {
-      font-size: 30px;
-      color: var(--logo-text-color);
-    }
+}
+.logo-con {
+  cursor: pointer;
+}
+.logo {
+  width: 47px;
+  margin-right: 20px;
+  & + span {
+    font-size: 30px;
+    color: var(--logo-text-color);
   }
 }
-.search-wrap {
-  flex-grow: 1;
-  max-width: 45rem;
-  margin: 0 auto;
-  font-size: 1rem;
-  padding: 0 $horizontal-space;
-  line-height: $header-height;
+@media (max-width: 768px) {
+  .header-con {
+    display: none;
+  }
 }
 </style>
