@@ -25,7 +25,6 @@ export default {
         let res = await getActivePeerCount();
         this.count = this.formatNumber(Number(res.count));
       } catch (e) {
-        // eslint-disable-next-line
         console.log(e);
       }
     }
@@ -39,6 +38,7 @@ export default {
 .footer {
   position: relative;
   color: var(--footer-text-color);
+  box-sizing: border-box;
   background: var(--board-bg-color);
   height: 70px;
   z-index: 10;

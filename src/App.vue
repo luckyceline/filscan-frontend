@@ -9,7 +9,6 @@
     <Footer />
   </div>
 </template>
-
 <script>
 import Header from "./views/header";
 import Footer from "./views/footer";
@@ -23,49 +22,72 @@ export default {
   methods: {
     ...mapMutations(["setRate"])
   },
-  created() {
-    window.addEventListener("resize", this.windowResize);
-    this.windowResize();
-  },
-  destroyed() {
-    window.removeEventListener("resize", this.windowResize);
-  },
+  mounted() {
+    this.setRate(window.innerWidth / 1920);
+    window.addEventListener("orientationchange", () => {
+      window.location.reload();
+    });
+    window.addEventListener("keydown", event => {
+      if (
+        (event.ctrlKey === true || event.metaKey === true) &&
+        (event.which === 61 ||
+          event.which === 107 ||
+          event.which === 173 ||
+          event.which === 109 ||
+          event.which === 187 ||
+          event.which === 189)
+      ) {
+        event.preventDefault();
+      }
+    });
+    window.addEventListener(
+      "mousewheel DOMMouseScroll",
+      function(event) {
+        if (event.ctrlKey === true || event.metaKey) {
+          event.preventDefault();
+        }
+      },
+      false
+    );
+  }
 };
 </script>
-
-<style lang="scss" scoped>
-  #app {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-  .header {
-    position: fixed;
-    width: 100%;
-    height: $header-height;
-  }
-
-  .content-container {
-    height: 100%;
-    > div {
-      padding: calc(#{$header-height} + #{$vertical-space}) $horizontal-space $footer-height;
-      margin: 0;
-      flex-grow: 1;
-      height: 100%;
-      overflow-x: scroll;
-      background: var(--main-bg-color);
-      display: flex;
-      flex-direction: column;
+<style lang="scss">
+html,
+body,
+#app {
+  height: 100%;
+  background: var(--main-bg-color);
+  font-size: 14px;
+}
+.content-container {
+  padding: 90px 20px 10px;
+  min-height: calc(100% - 60px);
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+  color: white;
+}
+:root {
+  div {
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+    &::-webkit-scrollbar-track {
+      width: 5px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: var(--scroll-bg-color);
+      border-radius: 5px;
     }
   }
-  .footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: $footer-height;
-    font-size: .75rem;
-    line-height: $footer-height;
-    padding: 0 $horizontal-space;
+}
+@media (max-width: 768px) {
+  .content-container {
+    padding: 60px 10px 30px;
+    background: var(--main-bg-color);
+    font-size: 12px;
   }
-
+}
 </style>

@@ -1,11 +1,9 @@
 <template>
-  <div class="block-detail">
+  <div class="block-detail bottom-10 top-20">
     <div class="block-overview">
       <overview :dataList="realList" :dataLabel="$t('tipset.block.overview')" />
     </div>
-    <div class="panel">
-      <message-list :withType="false" :cid="hash" />
-    </div>
+    <message-list :withType="false" :cid="hash" />
   </div>
 </template>
 <script>
@@ -96,16 +94,13 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-  .block-overview {
-    padding-bottom: $vertical-space;
+.block-detail {
+  position: relative;
+  .block-hash {
+    background: white;
   }
-  .block-detail {
-    position: relative;
-    .block-hash {
-      background: white;
-    }
+  & ::v-deep .message-list {
+    margin-top: 20px;
   }
-  .panel {
-    @include panel;
-  }
+}
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="fil-vested-chart" v-resize:debounce="resizeChart">
+  <div class="fil-vested-chart">
     <time-selector>
       <span slot="left" class="title">
         {{ $t("stats.metrics.filVested.title") }}
@@ -13,9 +13,6 @@ let chart;
 export default {
   name: "FilVestedChart",
   methods: {
-    resizeChart() {
-      chart.resize();
-    },
     drawChart() {
       const rate = this.rate;
       const { splitLine, seriesItem } = this.chartTheme.filVested;
@@ -156,8 +153,9 @@ export default {
 </script>
 <style lang="scss" scoped>
 .fil-vested-chart {
-  @include panel;
-
+  background: var(--board-bg-color);
+  border-radius: 8px;
+  box-shadow: 0px 1px 7px 9px rgba(0, 0, 0, 0.03);
   .title {
     font-size: 20px;
     color: var(--main-text-color);

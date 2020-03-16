@@ -1,78 +1,74 @@
 <template>
-  <div class="base-table" >
-    <slot name="header" ref="header"></slot>
-    <div class="wrap" ref="wrap" v-resize.debounce="calcTableHeight">
-      <el-table
-        v-if="tableHeight"
-        :data="dataSource"
-        :stripe="stripe"
-        @sort-change="handleSortChange"
-        @header-click="handleHeaderClick"
-        v-bind="$attrs"
-        v-scroll="load"
-        v-loading="showLoading"
-        :span-method="spanMethod"
-        header-row-class-name="header-row"
-        element-loading-background="transparent"
-        :class="{ radius: radius, mini: atIndex }"
-        :size="atIndex ? 'mini' : ''"
-        :height="tableHeight"
-        :cell-class-name="getCellClass"
-        :default-sort="defaultSort"
+  <div class="base-table">
+    <slot name="header"></slot>
+    <el-table
+      :data="dataSource"
+      :stripe="stripe"
+      @sort-change="handleSortChange"
+      @header-click="handleHeaderClick"
+      v-bind="$attrs"
+      v-scroll="load"
+      v-loading="showLoading"
+      :span-method="spanMethod"
+      header-row-class-name="header-row"
+      element-loading-background="transparent"
+      :class="{ radius: radius, mini: atIndex }"
+      :size="atIndex ? 'mini' : ''"
+      :height="700 * rate"
+      :row-class-name="getRowClass"
+      :cell-class-name="getCellClass"
+      :default-sort="defaultSort"
+    >
+      <el-table-column v-if="expand" type="expand">
+        <template slot-scope="props">
+          <overview
+            :dataList="props.row.dataList"
+            :dataLabel="props.row.dataLabel"
+            :stripe="false"
+          />
+        </template>
+      </el-table-column>
+      <el-table-column
+        :label="item.label"
+        v-for="(item, index) in columnsWithLabel"
+        :key="item.key"
+        :sortable="item.sortable ? 'custom' : false"
+        :prop="item.key"
+        align="center"
+        :fixed="isMobile && index === 0"
       >
-        <el-table-column
-          v-if="expand"
-          type="expand"
-        >
-          <template slot-scope="props">
-            <overview
-              :dataList="props.row.dataList"
-              :dataLabel="props.row.dataLabel"
-              :stripe="false"
-            />
-          </template>
-        </el-table-column>
-
-        <el-table-column
-          :label="item.label"
-          v-for="(item, index) in columnsWithLabel"
-          :key="item.key"
-          :sortable="item.sortable ? 'custom' : false"
-          :prop="item.key"
-          align="left"
-          :fixed="isMobile && index === 0"
-        >
-          <template slot-scope="scope">
-            <base-link
-              v-if="item.isLink && !item.isComponent"
-              :target="scope.row.target || item.target"
-              :param="{
+        <template slot-scope="scope">
+          <base-link
+            :target="scope.row.target || item.target"
+            :param="{
               key: item.paramKey || item.key,
               value: scope.row[item.key]
             }"
-              :underline="item.underline"
-              :label="`${scope.row[item.key]} ${item.unit || ''}`"
-              :class=textOverflowEllipsis(scope.row[item.key])
-            ></base-link>
-            <span v-if="!item.isLink && !item.isComponent">{{
+            :underline="item.underline"
+            v-if="item.isLink && !item.isComponent"
+            :label="
+              `${ellipsisByLength(
+                scope.row[item.key],
+                6,
+                item.ellipsis
+              )} ${item.unit || ''}`
+            "
+          ></base-link>
+          <span v-if="!item.isLink && !item.isComponent">{{
             `${scope.row[item.key]} ${item.unit || ""}`
           }}</span>
-            <component :is="scope.row[item.key]" v-if="item.isComponent" />
-          </template>
-
-        </el-table-column>
-
-
-      </el-table>
-    </div>
-    <div
-      slot="append"
-      v-if="showAppend"
-      class="cloumn-append"
-      @click="$emit('click-append')"
-    >
-      {{ $t('home.baseTable.more') }}
-    </div>
+          <component :is="scope.row[item.key]" v-if="item.isComponent" />
+        </template>
+      </el-table-column>
+      <div
+        slot="append"
+        v-if="showAppend"
+        class="cloumn-append"
+        @click="$emit('click-append')"
+      >
+        More
+      </div>
+    </el-table>
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
@@ -84,9 +80,7 @@
       :total="total"
       v-if="showPagination"
     ></el-pagination>
-
     <slot name="footer"></slot>
-
   </div>
 </template>
 <script>
@@ -96,10 +90,6 @@ export default {
   name: "BaseTable",
   inheritAttrs: false,
   props: {
-    tableHeightValue: {
-      type: Number,
-      default: 0
-    },
     dataSource: {
       type: Array,
       default() {
@@ -185,20 +175,12 @@ export default {
       }
     }
   },
-  mounted() {
-    this.calcTableHeight();
-  },
   computed: {
-    tableHeight: {
-      get: function() {
-        return this.tableHeightValue;
-      },
-    },
     columnsWithLabel() {
       return this.columns.map((item, index) => {
         return {
           ...item,
-          label: this.labels[index],
+          label: this.labels[index]
         };
       });
     },
@@ -210,29 +192,6 @@ export default {
     ...mapState(["rate"])
   },
   methods: {
-    calcTableHeight () {
-      var vm = this
-      this.$nextTick(function () {
-
-        let height = this.$refs.wrap.clientHeight;
-        // console.log(height, 'this.$refs.wrap.clientHeight')
-
-        // Pixel value of 2 * $horizontal-space (which is 1rem)
-        const baseFontSize = window.getComputedStyle(document.body).getPropertyValue('font-size').match(/\d+/)[0]
-        // console.log({
-        //   height,
-        //   '$refs': this.$refs,
-        //   fontSize
-        // },' @ $nextTick');
-        vm.tableHeightValue = height - 2 * baseFontSize;
-      });
-    },
-    textOverflowEllipsis(text) {
-      if (text.length > 10) {
-        return `text-overflow-ellipsis`;
-      }
-      return '';
-    },
     handleSizeChange(size) {
       this.$emit("size-change", size);
     },
@@ -270,6 +229,31 @@ export default {
     handleHeaderClick(column) {
       this.$emit("header-click", column);
     },
+    getRowClass({ rowIndex }) {
+      if (this.stripe) {
+        return "";
+      }
+      rowIndex++;
+      if (!this.spanMap["0"]) {
+        return;
+      }
+      let res = Object.entries(this.spanMap)
+        .sort((pre, next) => {
+          return pre[0] - next[0];
+        })
+        .map(item => {
+          return [Number(item[0]) + 1, Number(item[0]) + item[1] + 1];
+        });
+      let className = "";
+      for (let i = 0; i < res.length; i++) {
+        const [left, right] = res[i];
+        if (rowIndex >= left && rowIndex < right) {
+          className = i % 2 === 0 ? "even" : "odd";
+          break;
+        }
+      }
+      return className;
+    },
     getCellClass({ columnIndex }) {
       return columnIndex === 0 && !this.stripe ? "column-first" : "";
     }
@@ -281,37 +265,22 @@ export default {
 </script>
 <style lang="scss" scoped>
 .base-table {
-  @include fillHeight;
-
-  .wrap {
-    width: 100%;
-    height: inherit;
-    @media (min-width: 48rem) {
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-      height: inherit;
-      position: relative;
-    }
+  & ::v-deep .el-table.radius {
+    border-radius: 8px;
   }
-
   & ::v-deep .el-table__header-wrapper {
     tr {
-      height: 1.875rem;
+      height: 60px;
     }
   }
   & ::v-deep .el-table__body-wrapper {
     tr {
-      height: 1.875rem;
+      height: 60px;
     }
   }
-
   & ::v-deep .el-table {
-    display: flex;
-    flex-direction: column;
-    height: inherit;
+    padding-bottom: 20px;
     background: var(--board-bg-color) !important;
-
     &::before {
       height: 0 !important;
     }
@@ -321,7 +290,7 @@ export default {
       border-bottom-color: var(--table-header-border-color) !important;
     }
     tr {
-      background: var(--table-row-bg-color);
+      background: var(--table-row-bg-color) !important;
       &:not(.even):hover td {
         background: var(--board-bg-color);
       }
@@ -363,62 +332,73 @@ export default {
     }
     &.mini th,
     &.mini tr {
-      line-height: $--font-size-base;
-      font-size: $--font-size-extra-small;
-      height: $--font-size-base;
+      height: 20px;
     }
   }
-
   & ::v-deep .el-pagination {
     display: flex;
     justify-content: center;
-    padding-top: $vertical-space / 2;
-    font-size: .75rem;
     align-items: center;
-    font-weight: normal;
-
+    height: 60px;
+    background: var(--board-bg-color);
     & * {
-      font-size: inherit;
+      font-size: 16px;
       color: var(--main-text-color) !important;
       &.active {
         color: var(--link-color) !important;
       }
-      .el-input__inner {
-        line-height: inherit;
-        height: inherit;
-        font-size: inherit;
-        vertical-align: middle;
-      }
-    }
-    [class^="el-icon-arrow-"] {
-      outline: 2px solid red;
-      font-size: var(--$--font-size-base);
-      line-height: inherit;
     }
     & .el-select .el-input {
-      width: 10rem;
+      width: 120px;
     }
     .el-pager li {
-      background: transparent;
+      background: var(--board-bg-color);
     }
     button {
       background: var(--board-bg-color) !important;
     }
     input {
-      background: transparent;
+      background: var(--board-bg-color) !important;
     }
   }
-
   & ::v-deep .el-link.underline {
     text-decoration: underline;
   }
   .cloumn-append {
-    display: none;
     text-align: center;
-    font-size: .75rem;
-    color: var(--logo-text-color);
+    height: 48px;
+    line-height: 2;
+    background: var(--board-bg-color);
+    color: var(--main-text-color);
     cursor: pointer;
-    padding-top: $vertical-space;
+    @media (max-width: 768px) {
+      height: 30px;
+      line-height: 30px;
+    }
+  }
+  @media (max-width: 768px) {
+    & ::v-deep .el-pagination {
+      text-align: center;
+      background: var(--board-bg-color);
+      height: 30px;
+      .el-pagination__jump,
+      button,
+      .el-pager li {
+        height: 30px !important;
+        line-height: 30px !important;
+        min-width: 20px;
+        font-size: 12px !important;
+      }
+      button i {
+        font-size: 12px !important;
+      }
+      .el-pagination__jump input {
+        height: 20px !important;
+        line-height: 20px !important;
+        min-width: 30px !important;
+        font-size: 12px;
+      }
+    }
   }
 }
 </style>
