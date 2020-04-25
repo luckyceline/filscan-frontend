@@ -31,6 +31,7 @@ Filscan is a blockchain browser for Filecoin, which can be used to view Filecoin
     - [Configuration](#configuration)
     - [Run](#run)
   - [API Document](#api-document)
+  - [License](#license)
 
 # Front-End
 
@@ -219,3 +220,12 @@ The application will check lotus and mongo’s status. The application will stop
 ## API Document
 
 Check document [here](https://github.com/ipfs-force-community/filscan-backend/blob/master/Filscan_Interface_v1.0.md)
+
+
+
+## License
+Dual-licensed under 
+
+[MIT](https://github.com/filecoin-project/lotus/blob/master/LICENSE-MIT) 
+
+[Apache 2.0](https://github.com/filecoin-project/lotus/blob/master/LICENSE-APACHE)
