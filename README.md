@@ -7,7 +7,7 @@ Filscan(https://filscan.io/) is the first data browser in the Filecoin ecosystem
 - [Table of Contents](#table-of-contents)
   - Key of features
   - Half year Plan
-  - Follow and Reach us
+  - Get involved
 - [Front-End](#front-end)
   - [Install](#install)
     - [Environmental requirements](#environmental-requirements)
@@ -56,7 +56,7 @@ Filscan(https://filscan.io/) is the first data browser in the Filecoin ecosystem
 
 ![image](https://user-images.githubusercontent.com/86345705/129296455-c5d02cab-27b4-4bf8-9803-67a99914cd25.png)
 
-### Half year plan :(before the end of 2021)
+### Half year plan :(Next 6 months)
 
 •  Upgrade the back-end architecture to improve the access speed
 
@@ -70,7 +70,11 @@ Filscan(https://filscan.io/) is the first data browser in the Filecoin ecosystem
 
 •  Add address collection list, convenient to view address information faster
 
-### Follow and Contact us
+### Get involved
+
+As a Filecoin ecosystem open source project, Filscan is keen to get your feedback and suggestions. 
+
+Follower and Reach us:
 
 Twitter: https://twitter.com/force_ipfs
 
