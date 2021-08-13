@@ -1,20 +1,14 @@
 # Overview
 
-Filscan is a blockchain browser for Filecoin, which can be used to view Filecoin blockchain data, including querying addresses, messages information, block heights, miner information, token information, etc.
+Filscan(https://filscan.io/) is the first data browser in the Filecoin ecosystem and is dedicated to building the Filecoin network data analysis center, providing the Filecoin ecosystem services, data visualization and other one-stop data services for the whole chain, and building a data intelligence platform for business applications. 
 
 # Table of Contents
 - [Overview](#overview)
 - [Table of Contents](#table-of-contents)
+  - Key of features
+  - Half year Plan
+  - Follow and Reach us
 - [Front-End](#front-end)
-  - [Recommended Browser](#recommended-browser)
-  - [User Guide](#user-guide)
-    - [Comments](#comments)
-    - [Site Map](#site-map)
-    - [Home Page](#home-page)
-    - [Tipset Page](#tipset-page)
-    - [Mining Page](#mining-page)
-    - [Token Metrics](#token-metrics)
-    - [Peer Map](#peer-map)
   - [Install](#install)
     - [Environmental requirements](#environmental-requirements)
     - [Install Dependencies](#install-dependencies)
@@ -33,107 +27,58 @@ Filscan is a blockchain browser for Filecoin, which can be used to view Filecoin
   - [API Document](#api-document)
   - [License](#license)
 
+
+## Key Features of Filscan
+
+•  Provide data applications based on various scenarios
+
+![image](https://user-images.githubusercontent.com/86345705/129295935-15f398b2-fbe9-46fb-9d95-f6e8b5c7beb3.png)
+
+• Provide real-time data display and API interface
+
+
+![image](https://user-images.githubusercontent.com/86345705/129296005-298481b5-db14-4c79-b8c3-1e80ff7f1f61.png)
+
+• Provide data visualization services to increase business management capabilities
+
+
+![image](https://user-images.githubusercontent.com/86345705/129296094-c463333b-494c-47c7-a25a-9406eb8edcd8.png)
+
+• Provide rich data analysis functions to drive business progress
+
+![image](https://user-images.githubusercontent.com/86345705/129296192-7b9ae3b2-d576-44b8-b7f7-6a17b297ee42.png)
+
+• Provide advanced services such as predictive analysis and business progress effect evaluation
+
+![image](https://user-images.githubusercontent.com/86345705/129296331-5e75e79e-2cc5-4533-a5df-a8b2605e414e.png)
+
+• Monitoring panel multi-node data collection and monitoring
+
+![image](https://user-images.githubusercontent.com/86345705/129296455-c5d02cab-27b4-4bf8-9803-67a99914cd25.png)
+
+### Half year plan :(before the end of 2021)
+
+•  Upgrade the back-end architecture to improve the access speed
+
+•  Better UI page display and more intuitive data display
+
+•  Added Filecoin real order query
+
+•  Added the isolated block statistics and query function
+
+•  Use Key to open API interfaces
+
+•  Add address collection list, convenient to view address information faster
+
+### Follow and Contact us
+
+Twitter: https://twitter.com/force_ipfs
+
+Medium: https://ipfsforce-1751.medium.com/
+
+Email: filscan@ipfsforce.com
+
 # Front-End
-
-## Recommended Browser
-
-For the best experience with the Filscan, we recommend that use the latest version of a browser from this list:
-
-•       Microsoft Edge
-
-•       Mozilla Firefox
-
-•       Google Chrome/Chromium
-
-•       Apple Safari
-
-## User Guide
-
-### Comments
-
-**Active Miner:** the active miner is the miner that has made sector in the last 24 hours.
-
-**Active Peer:** the active peer is the node that has sent messages in the last 24 hours.
-
-### Site Map
-
-<p align="center">
-  <img width="100%" style="max-width:1200px" hspace="10" border="2" src="img/site-map.png">
-</p>
-
-### Home Page
-
-<p align="center">
-  <img width="100%" style="max-width:1200px" hspace="10" border="2" src="img/home-page.png">
-</p>
-
-You will get the latest chain status of Filecoin Blockchain, include the latest block&message table, the Tipset chain chart.
-
-**Search Bar:**
-
-It is convenient for users to query the blockchain data. User can query detail information about Address, Tipset Height, Block Hash, Message ID, Peer Id by search bar.
-
-**Navigation Bar:**
-
-It is an easy way to access the page you are interested in.
-
-**Chain status:**
-
-Shows the latest chain status.
-
-**The latest Blocks & Messages:**
-
-Shows the latest Blocks info & messages on chain.
-
-**BlockChain structure chart:**
-
-Shows the chain structure of the Filecoin.
-
-### Tipset Page
-
-<p align="center">
-  <img width="100%" style="max-width:1200px" hspace="10" border="2" src="img/tipset-page.png">
-</p>
-
-In this page user will see the chain struct and if click the block in the tipset, the block detail info will appear.
-
-### Mining Page
-
-**Active Storage Miners:**
-
-The chart shows the count of active miners in different periods.
-
-**Evolution of Top Miners for Miners For Proven Power:**
-
-<p align="center">
-  <img width="100%" style="max-width:1200px" hspace="10" border="2" src="img/mining-page.png">
-</p>
-
-The chart shows the Proven power of the top miners in different time periods.
-
-**Miner List**
-
-<p align="center">
-  <img width="100%" style="max-width:1200px" hspace="10" border="2" src="img/miner-list.png">
-</p>
-
-the table shows some miner key info, some of columns can be sorted. User can choose periods to show different data.
-
-### Token Metrics
-
-<p align="center">
-  <img width="100%" style="max-width:1200px" hspace="10" border="2" src="img/token-metrics.png">
-</p>
-
-The page displays the block reward and pledged amount of FIL tokens.
-
-### Peer Map
-
-<p align="center">
-  <img width="100%" style="max-width:1200px" hspace="10" border="2" src="img/peer-map.png">
-</p>
-
-This page shows the peer’s location on the map.
 
 ## Install
 
