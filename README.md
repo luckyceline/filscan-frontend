@@ -1,13 +1,13 @@
 # Overview
 
-Filscan(https://filscan.io/) is the first data browser in the Filecoin ecosystem and is dedicated to building the Filecoin network data analysis center, providing the Filecoin ecosystem services, data visualization and other one-stop data services for the whole chain, and building a data intelligence platform for business applications. 
+Filscan(https://filscan.io/) is the first data browser in the Filecoin ecosystem and is dedicated to building the Filecoin network data analysis center, providing the Filecoin ecosystem data services, visualization and other one-stop data analysis for the whole network, and building a data intelligence platform for 3rd party ecosystem applications. 
 
 # Table of Contents
 - [Overview](#overview)
 - [Table of Contents](#table-of-contents)
-  - Key of features
+  - Key Features of Filscan
   - Half year Plan
-  - Get involved
+  - Get involved and Contribute
 - [Front-End](#front-end)
   - [Install](#install)
     - [Environmental requirements](#environmental-requirements)
@@ -48,33 +48,33 @@ Filscan(https://filscan.io/) is the first data browser in the Filecoin ecosystem
 
 ![image](https://user-images.githubusercontent.com/86345705/129296192-7b9ae3b2-d576-44b8-b7f7-6a17b297ee42.png)
 
-• Provide advanced services such as predictive analysis and business progress effect evaluation
+• Provide advanced services such as predictive data analysis and business evaluation
 
 ![image](https://user-images.githubusercontent.com/86345705/129296331-5e75e79e-2cc5-4533-a5df-a8b2605e414e.png)
 
-• Monitoring panel multi-node data collection and monitoring
+• Monitoring panel to support multi-node data collection and monitoring
 
 ![image](https://user-images.githubusercontent.com/86345705/129296455-c5d02cab-27b4-4bf8-9803-67a99914cd25.png)
 
 ### Half year plan :(Next 6 months)
 
-•  Upgrade the back-end architecture to improve the access speed
+•  Upgrade the back-end architecture to improve the loading speed
 
-•  Better UI page display and more intuitive data display
+•  Better UI display and more intuitive data display
 
-•  Added Filecoin real order query
+•  Added order query about Filecoin real data 
 
 •  Added the isolated block statistics and query function
 
-•  Use Key to open API interfaces
+•  Set private Key to control API interfaces
 
 •  Add address collection list, convenient to view address information faster
 
-### Get involved
+### Get involved and Contribute
 
-As a Filecoin ecosystem open source project, Filscan is keen to get your feedback and suggestions. 
+As a Filecoin ecosystem open source project, Filscan is keen to welcome your feedback and suggestions. 
 
-Follower and Reach us:
+Reach us@
 
 Twitter: https://twitter.com/force_ipfs
 
