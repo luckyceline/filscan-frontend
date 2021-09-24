@@ -32,7 +32,8 @@ Filscan(https://filscan.io/) is the first data browser in the Filecoin ecosystem
 
 •  Provide data applications based on various scenarios
 
-![image](https://user-images.githubusercontent.com/86345705/129295935-15f398b2-fbe9-46fb-9d95-f6e8b5c7beb3.png)
+<img width="798" alt="1" src="https://user-images.githubusercontent.com/87884988/134648459-5a0b754f-f4a0-4cfa-83f0-3b8e1ef28a80.png">
+
 
 • Provide real-time data display and API interface
 
